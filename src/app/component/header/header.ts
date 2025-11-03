@@ -32,6 +32,10 @@ export class Header {
     this.router.navigate(['/client/login']);
   }
 
+  onRegister(): void {
+    this.router.navigate(['client/register']);
+  }
+
   toggleMenu() {
     this.menuOpen.update(open => !open);
   }

@@ -1,0 +1,17 @@
+<div class="w-full overflow-hidden rounded-xl shadow-lg bg-white border border-gray-100
+            p-4 h-full flex flex-col">
+
+    <div class="w-full rounded-md mb-4 flex items-center justify-center
+                relative overflow-hidden
+                flex-grow          /* Mantiene el estiramiento en row-span-2 */
+                h-0 pt-[60%]       /* 👈 CLAVE: Define la altura como 60% del ancho (proporción responsive) */
+                lg:pt-0">          <img [src]="item().path"
+             [alt]="'Sede en ' + item().city"
+             class="absolute inset-0 w-full h-full object-cover rounded-md">
+    </div>
+
+    <div class="flex flex-col space-y-1 flex-none">
+        <div class="text-sm font-bold text-gray-900">{{ item().city }}</div>
+        <div class="text-xs text-gray-600">{{ item().address }}</div>
+    </div>
+</div>

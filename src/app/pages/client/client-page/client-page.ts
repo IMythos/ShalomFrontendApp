@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Header } from "../../../component/header/header";
 import { Banner } from "../../../component/banner/banner";
 import { Auth } from '../../../core/services/auth';
+import { GalleryContainer } from "../../../component/gallery-container/gallery-container";
 
 @Component({
   selector: 'app-client-page',
-  imports: [Header, Banner],
+  imports: [Header, Banner, GalleryContainer],
   templateUrl: './client-page.html',
   styleUrl: './client-page.css'
 })

@@ -84,11 +84,13 @@
     <div class="border-t border-white/30 my-6"></div>
     <div class="flex flex-col gap-4">
       <button
+        (click)="onLogin()"
         class="flex items-center gap-3 text-white px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
         <mat-icon fontIcon="login"></mat-icon>
         <span>Iniciar Sesión</span>
       </button>
       <button
+        (click)="onRegister()"
         class="flex items-center gap-3 bg-white text-black px-4 py-2 rounded-lg hover:bg-white/80 hover:text-black transition">
         <mat-icon fontIcon="add"></mat-icon>
         <span>Registrarse</span>

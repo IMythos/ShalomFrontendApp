@@ -17,7 +17,7 @@ export class Header {
   public isAuthenticated: Signal<boolean> = this.authService.isAuthenticated$;
   public userDisplayName: Signal<string | null> = this.authService.userDisplayName$;
 
-  menuOpen = signal(false);
+  public menuOpen = signal(false);
 
   constructor() {
 
@@ -25,11 +25,13 @@ export class Header {
 
   onLogin(): void {
     this.router.navigate(['/client/login']);
+    this.menuOpen.set(false);
   }
 
   onLogout(): void {
     this.authService.logout();
     this.router.navigate(['/client/login']);
+    this.menuOpen.set(false);
   }
 
   onRegister(): void {

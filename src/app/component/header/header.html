@@ -1,39 +1,51 @@
 <header class="w-full bg-[#FE161D] fixed top-0 z-50 shadow-md transition-all duration-300">
-  <div class="w-full max-w-7xl mx-auto flex justify-between items-center h-[85px] px-6 sm:px-10 lg:px-0">
-      <a routerLink="/client" class="h-[60px] w-[150px] sm:w-[200px]">
-        <img class="w-full h-full object-contain" src="assets/logo.png" alt="Logo" />
-      </a>
-      <nav class="hidden md:flex items-center">
-        <ul class="flex items-center gap-8">
-          <a routerLink="/client">
-            <li class="flex items-center text-white gap-2 pb-1 border-b-2 border-transparent hover:border-amber-50 transition cursor-pointer">
-              <span>Inicio</span>
-            </li>
-          </a>
-          <a routerLink="/rastrear">
-            <li class="flex items-center text-white gap-2 pb-1 border-b-2 border-transparent hover:border-amber-50 transition cursor-pointer">
-              <span>Rastrea</span>
-            </li>
-          </a>
-          <a routerLink="/servicios">
-            <li class="flex items-center text-white gap-2 pb-1 border-b-2 border-transparent hover:border-amber-50 transition cursor-pointer">
-              <span>Servicios</span>
-            </li>
-          </a>
-          <a routerLink="/agencias">
-            <li class="flex items-center text-white gap-2 pb-1 border-b-2 border-transparent hover:border-amber-50 transition cursor-pointer">
-              <span>Agencias</span>
-            </li>
-          </a>
-          <a routerLink="/tarifas">
-            <li class="flex items-center text-white gap-2 pb-1 border-b-2 border-transparent hover:border-amber-50 transition cursor-pointer">
-              <span>Tarifas</span>
-            </li>
-          </a>
-        </ul>
-      </nav>
+        <div class="w-full max-w-7xl mx-auto flex justify-between items-center h-[85px] px-6 sm:px-10 lg:px-0">
+
+            <!-- Logo -->
+            <a routerLink="/client" class="h-[60px] w-[150px] sm:w-[200px]">
+                <img class="w-full h-full object-contain" src="assets/logo.png" alt="Logo" />
+            </a>
+
+            <!-- Menú de Navegación (Desktop) -->
+            <nav class="hidden md:flex items-center">
+                <ul class="flex items-center gap-8">
+                    <!-- Inicio -->
+                    <a routerLink="/client">
+                        <li class="flex items-center text-white gap-2 pb-1 border-b-2 border-transparent hover:border-amber-50 transition cursor-pointer">
+                            <span>Inicio</span>
+                        </li>
+                    </a>
+                    <!-- Rastrea -->
+                    <a routerLink="/rastrear">
+                        <li class="flex items-center text-white gap-2 pb-1 border-b-2 border-transparent hover:border-amber-50 transition cursor-pointer">
+                            <span>Rastrea</span>
+                        </li>
+                    </a>
+                    <!-- Servicios (Asumo que esta ruta es /servicios) -->
+                    <a routerLink="/servicios">
+                        <li class="flex items-center text-white gap-2 pb-1 border-b-2 border-transparent hover:border-amber-50 transition cursor-pointer">
+                            <span>Servicios</span>
+                        </li>
+                    </a>
+                    <!-- Agencias (Asumo que esta ruta es /agencias) -->
+                    <a routerLink="/agencias">
+                        <li class="flex items-center text-white gap-2 pb-1 border-b-2 border-transparent hover:border-amber-50 transition cursor-pointer">
+                            <span>Agencias</span>
+                        </li>
+                    </a>
+                    <!-- Tarifas -->
+                    <a routerLink="/tarifas">
+                        <li class="flex items-center text-white gap-2 pb-1 border-b-2 border-transparent hover:border-amber-50 transition cursor-pointer">
+                            <span>Tarifas</span>
+                        </li>
+                    </a>
+                </ul>
+            </nav>
+
+            <!-- Botones/Usuario (Desktop) -->
             <div class="hidden md:flex items-center gap-4">
                 @if (isAuthenticated()) {
+                    <!-- Estado: Autenticado -->
                     <div class="flex items-center gap-4">
                         <span class="text-white font-semibold border-b-2 border-white pb-1">
                             {{ userDisplayName() }}
@@ -45,6 +57,7 @@
                         </button>
                     </div>
                 } @else {
+                    <!-- Estado: No Autenticado -->
                     <button (click)="onLogin()" class="flex items-center gap-2 text-white hover:text-gray-200 transition">
                         <mat-icon fontIcon="login"></mat-icon>
                         <span>Iniciar Sesión</span>
@@ -56,72 +69,94 @@
                     </button>
                 }
             </div>
+
+            <!-- Botón de Menú (Mobile) -->
             <div class="md:hidden flex items-center">
                 <button (click)="toggleMenu()" class="text-white focus:outline-none">
                     <mat-icon [fontIcon]="menuOpen() ? 'close' : 'menu'" class="w-8 h-8"></mat-icon>
                 </button>
             </div>
         </div>
-        @if (menuOpen()) {
-            <div (click)="toggleMenu()" class="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden z-30 transition-opacity duration-300"></div>
-            <nav [class.translate-x-0]="menuOpen()" [class.-translate-x-full]="!menuOpen()" class="fixed top-0 left-0 w-60 h-full bg-[#FE161D] transform transition-transform duration-300 md:hidden shadow-lg z-40 flex flex-col pt-24 px-4">
-                <ul class="flex flex-col gap-4">
-                    <a routerLink="/client" (click)="toggleMenu()">
-                        <li class="flex items-center text-white gap-3 cursor-pointer px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
-                            <mat-icon fontIcon="home" class="text-2xl"></mat-icon>
-                            <span>Inicio</span>
-                        </li>
-                    </a>
-                    <a routerLink="/rastrear" (click)="toggleMenu()">
-                        <li class="flex items-center text-white gap-3 cursor-pointer px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
-                            <mat-icon fontIcon="search" class="text-2xl"></mat-icon>
-                            <span>Rastrea</span>
-                        </li>
-                    </a>
-                    <a routerLink="/servicios" (click)="toggleMenu()">
-                        <li class="flex items-center text-white gap-3 cursor-pointer px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
-                            <mat-icon fontIcon="inventory" class="text-2xl"></mat-icon>
-                            <span>Servicios</span>
-                        </li>
-                    </a>
-                    <a routerLink="/agencias" (click)="toggleMenu()">
-                        <li class="flex items-center text-white gap-3 cursor-pointer px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
-                            <mat-icon fontIcon="map" class="text-2xl"></mat-icon>
-                            <span>Agencias</span>
-                        </li>
-                    </a>
-                    <a routerLink="/tarifas" (click)="toggleMenu()">
-                        <li class="flex items-center text-white gap-3 cursor-pointer px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
-                            <mat-icon fontIcon="ballot" class="text-2xl"></mat-icon>
-                            <span>Tarifas</span>
-                        </li>
-                    </a>
-                </ul>
-                <div class="border-t border-white/30 my-6"></div>
-                <div class="flex flex-col gap-4">
-                    @if (isAuthenticated()) {
-                        <span class="text-white font-semibold px-3 py-2 border-b border-white/50">{{ userDisplayName() }}</span>
-                        <button
-                            (click)="onLogout()"
-                            class="flex items-center gap-3 bg-white text-black px-4 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
-                            <mat-icon fontIcon="logout"></mat-icon>
-                            <span>Cerrar Sesión</span>
-                        </button>
-                    } @else {
-                        <button
-                            (click)="onLogin()"
-                            class="flex items-center gap-3 text-white px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
-                            <mat-icon fontIcon="login"></mat-icon>
-                            <span>Iniciar Sesión</span>
-                        </button>
-                        <button
-                            (click)="onRegister()"
-                            class="flex items-center gap-3 bg-white text-black px-4 py-2 rounded-lg hover:bg-white/80 hover:text-black transition">
-                            <mat-icon fontIcon="add"></mat-icon>
-                            <span>Registrarse</span>
-                        </button>
-                    }
-                </div>
-            </nav>
-        }
+
+        <!-- Menú Móvil Desplegable -->
+
+        <!-- Overlay de fondo (Se controla la visibilidad con opacidad y pointer-events) -->
+        <div (click)="toggleMenu()"
+            [class.opacity-100]="menuOpen()"
+            [class.opacity-0]="!menuOpen()"
+            [class.pointer-events-auto]="menuOpen()"
+            [class.pointer-events-none]="!menuOpen()"
+            class="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden z-30 transition-opacity duration-300">
+        </div>
+
+        <!-- Panel Lateral (Se controla el deslizamiento con transform) -->
+        <nav
+            [class.translate-x-0]="menuOpen()"
+            [class.-translate-x-full]="!menuOpen()"
+            class="fixed top-0 left-0 w-60 h-full bg-[#FE161D] transform transition-transform duration-300 md:hidden shadow-lg z-40 flex flex-col pt-24 px-4">
+
+            <ul class="flex flex-col gap-4">
+                <!-- Rutas de navegación (Mobile) -->
+                <a routerLink="/client" (click)="toggleMenu()">
+                    <li class="flex items-center text-white gap-3 cursor-pointer px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
+                        <mat-icon fontIcon="home" class="text-2xl"></mat-icon>
+                        <span>Inicio</span>
+                    </li>
+                </a>
+                <a routerLink="/rastrear" (click)="toggleMenu()">
+                    <li class="flex items-center text-white gap-3 cursor-pointer px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
+                        <mat-icon fontIcon="search" class="text-2xl"></mat-icon>
+                        <span>Rastrea</span>
+                    </li>
+                </a>
+                <a routerLink="/servicios" (click)="toggleMenu()">
+                    <li class="flex items-center text-white gap-3 cursor-pointer px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
+                        <mat-icon fontIcon="inventory" class="text-2xl"></mat-icon>
+                        <span>Servicios</span>
+                    </li>
+                </a>
+                <a routerLink="/agencias" (click)="toggleMenu()">
+                    <li class="flex items-center text-white gap-3 cursor-pointer px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
+                        <mat-icon fontIcon="map" class="text-2xl"></mat-icon>
+                        <span>Agencias</span>
+                    </li>
+                </a>
+                <a routerLink="/tarifas" (click)="toggleMenu()">
+                    <li class="flex items-center text-white gap-3 cursor-pointer px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
+                        <mat-icon fontIcon="ballot" class="text-2xl"></mat-icon>
+                        <span>Tarifas</span>
+                    </li>
+                </a>
+            </ul>
+
+            <div class="border-t border-white/30 my-6"></div>
+
+            <!-- Botones/Usuario (Mobile) -->
+            <div class="flex flex-col gap-4">
+                @if (isAuthenticated()) {
+                    <!-- Estado: Autenticado -->
+                    <span class="text-white font-semibold px-3 py-2 border-b border-white/50">{{ userDisplayName() }}</span>
+                    <button
+                        (click)="onLogout()"
+                        class="flex items-center gap-3 bg-white text-black px-4 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
+                        <mat-icon fontIcon="logout"></mat-icon>
+                        <span>Cerrar Sesión</span>
+                    </button>
+                } @else {
+                    <!-- Estado: No Autenticado -->
+                    <button
+                        (click)="onLogin()"
+                        class="flex items-center gap-3 text-white px-3 py-2 rounded-lg transition hover:bg-white/80 hover:text-black">
+                        <mat-icon fontIcon="login"></mat-icon>
+                        <span>Iniciar Sesión</span>
+                    </button>
+                    <button
+                        (click)="onRegister()"
+                        class="flex items-center gap-3 bg-white text-black px-4 py-2 rounded-lg hover:bg-white/80 hover:text-black transition">
+                        <mat-icon fontIcon="add"></mat-icon>
+                        <span>Registrarse</span>
+                    </button>
+                }
+            </div>
+        </nav>
     </header>

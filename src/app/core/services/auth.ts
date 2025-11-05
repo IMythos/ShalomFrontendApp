@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { LoginRequest, LoginResponse } from '../models/auth-model';
 import { Observable, tap } from 'rxjs';
+import { RegisterRequest, RegisterResponse } from '../models/register-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Auth {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = 'http://localhost:8080/api';
 
   private _isAuthenticated = signal<boolean>(this.checkInitialAuthStatus());
   public isAuthenticated$: Signal<boolean> = this._isAuthenticated.asReadonly();
@@ -26,7 +27,7 @@ export class Auth {
   }
 
   login(request: LoginRequest): Observable<LoginResponse> {
-    const loginUrl = `${this.apiUrl}/client/login`;
+    const loginUrl = `${this.apiUrl}/auth/login`;
 
     return this.http.post<LoginResponse>(loginUrl, request)
       .pipe(
@@ -36,6 +37,12 @@ export class Auth {
           }
         })
       );
+  }
+
+  register(request: RegisterRequest): Observable<RegisterResponse> {
+    const registerUrl = `${this.apiUrl}/users/register`;
+
+    return this.http.post<RegisterResponse>(registerUrl, request);
   }
 
   logout(): void {

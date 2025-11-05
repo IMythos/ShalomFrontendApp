@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Signal, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Auth } from '../../core/services/auth';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
@@ -18,10 +18,6 @@ export class Header {
   public userDisplayName: Signal<string | null> = this.authService.userDisplayName$;
 
   public menuOpen = signal(false);
-
-  constructor() {
-
-  }
 
   onLogin(): void {
     this.router.navigate(['/client/login']);
@@ -36,6 +32,7 @@ export class Header {
 
   onRegister(): void {
     this.router.navigate(['client/register']);
+    this.menuOpen.set(false);
   }
 
   toggleMenu() {

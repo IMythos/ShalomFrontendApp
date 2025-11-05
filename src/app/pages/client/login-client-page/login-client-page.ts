@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { Auth } from '../../../core/services/auth';
+import { LoginRequest } from '../../../core/models/auth-model';
 
 @Component({
   selector: 'app-login-client-page',
@@ -13,8 +15,10 @@ import { MatIconModule } from '@angular/material/icon';
 export class LoginClientPage implements OnInit {
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  private authService = inject(Auth);
 
   loginForm!: FormGroup;
+  errorMessage: string | null = null;
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -25,9 +29,22 @@ export class LoginClientPage implements OnInit {
 
   onLoginSubmit(): void {
     if (this.loginForm.valid) {
+      this.errorMessage = null;
+      const request: LoginRequest = this.loginForm.value;
 
+      this.authService.login(request).subscribe({
+        next: (response) => {
+          if (response.success) {
+            console.log('Login exitoso. Token: ', response.data?.token);
+            this.goToHome();
+          }
+        },
+        error: (error) => {
+          console.error("Error en el login: ", error);
+          this.errorMessage = error.error?.message || 'Error de conexion o credenciales invalidas.';
+        }
+      });
     } else {
-      console.error('El formulario no es valido.');
       this.loginForm.markAllAsTouched();
     }
   }

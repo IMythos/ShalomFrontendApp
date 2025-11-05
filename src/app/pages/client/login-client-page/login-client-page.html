@@ -1,1 +1,76 @@
-<p>login-client-page works!</p>
+<div class="min-h-screen flex">
+  <div class="w-full lg:w-3/5 flex items-center justify-center p-6 sm:p-12 lg:p-20">
+    <div class="max-w-md w-full space-y-8">
+      <a (click)="goToHome()" class="text-gray-500 hover:text-gray-700 transition flex items-center gap-1 text-sm">
+        <mat-icon fontIcon="arrow_back_ios" class="text-base"></mat-icon>
+        Ir al Inicio
+      </a>
+      <h1 class="text-3xl font-bold text-gray-900 mt-6">Iniciar Sesión</h1>
+      <p class="text-gray-600 -mt-6">Ingrese sus credenciales de acceso como cliente</p>
+      <button class="w-full flex items-center justify-center gap-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-gray-700 font-semibold">
+        <img class="w-5 h-5" src="assets/google-icon.png" />
+        Iniciar sesión con Google
+      </button>
+      <div class="relative flex items-center py-5">
+        <div class="flex-grow border-t border-gray-300"></div>
+        <span class="flex-shrink mx-4 text-gray-400 text-sm">o</span>
+        <div class="flex-grow border-t border-gray-300"></div>
+      </div>
+      <form class="space-y-4" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email *</label>
+          <input type="email" id="email" placeholder="email@example.com" formControlName="email" class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring-[#FE161D] focus:border-[#FE161D]">
+          @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+            <p class="mt-1 text-sm text-red-600">
+              @if (loginForm.get('email')?.errors?.['required']) {
+                El email es obligatorio.
+              } @else if (loginForm.get('email')?.errors?.['email']) {
+                Formato de email inválido.
+              }
+            </p>
+          }
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Password *</label>
+          <input type="password" id="password" placeholder="Minimo de 6 caracteres" formControlName="password" class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring-[#FE161D] focus:border-[#FE161D]">
+          <p class="mt-1 text-xs text-gray-500">Mínimo de 6 caracteres</p>
+          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+            <p class="mt-1 text-sm text-red-600">
+              @if (loginForm.get('password')?.errors?.['required']) {
+                La contraseña es obligatoria.
+              } @else if (loginForm.get('password')?.errors?.['minlength']) {
+                La contraseña debe tener al menos 6 caracteres.
+              }
+            </p>
+          }
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid"
+          class="w-full flex items-center justify-center p-3 text-white bg-[#FE161D] font-semibold rounded-lg hover:bg-red-700 transition duration-300 shadow-lg disabled:bg-red-300">
+          Iniciar Sesión
+        </button>
+      </form>
+      <div class="text-center pt-2">
+        <p class="text-sm text-gray-600">
+          ¿No estás registrado?
+          <a routerLink="/register" class="text-[#FE161D] font-semibold hover:text-red-700 transition">
+            Crea una cuenta aquí
+          </a>
+        </p>
+      </div>
+      <div class="text-center text-xs text-gray-400 pt-10">
+        <p>© 2025. Shalom S.A.C. Todos los derechos reservados</p>
+      </div>
+    </div>
+  </div>
+  <div class="hidden lg:flex lg:w-2/5 bg-[#FE161D] items-center justify-center relative overflow-hidden rounded-l-[10%]">
+    <div class="relative z-10 text-white text-center">
+      <div class="w-60 h-60 mx-auto mb-4 flex items-center justify-center">
+        <img src="assets/box-open.png" alt="Ícono de Caja" class="w-full h-full object-contain">
+      </div>
+      <div class="w-64 mx-auto">
+        <img src="assets/logo.png" alt="Logo Shalom" class="w-full h-auto object-contain">
+      </div>
+    </div>
+    <div class="absolute inset-0 bg-black/10"></div>
+  </div>
+</div>

@@ -3,10 +3,12 @@ import { Header } from "../../../component/header/header";
 import { Banner } from "../../../component/banner/banner";
 import { Auth } from '../../../core/services/auth';
 import { GalleryContainer } from "../../../component/gallery-container/gallery-container";
+import { Footer } from "../../../component/footer/footer";
+import { CallAction } from "../../../component/call-action/call-action";
 
 @Component({
   selector: 'app-client-page',
-  imports: [Header, Banner, GalleryContainer],
+  imports: [Header, Banner, GalleryContainer, Footer, CallAction],
   templateUrl: './client-page.html',
   styleUrl: './client-page.css'
 })

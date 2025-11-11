@@ -67,4 +67,8 @@ export class RegisterClientPage implements OnInit {
   goToClientHome(): void {
     this.router.navigate(['/client']);
   }
+
+  goToLogin(): void {
+    this.router.navigate(['/client/login']);
+  }
 }

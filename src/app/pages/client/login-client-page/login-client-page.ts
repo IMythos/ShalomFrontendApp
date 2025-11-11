@@ -35,7 +35,6 @@ export class LoginClientPage implements OnInit {
       this.authService.login(request).subscribe({
         next: (response) => {
           if (response.success) {
-            console.log('Login exitoso. Token: ', response.data?.token);
             this.goToHome();
           }
         },
@@ -51,5 +50,9 @@ export class LoginClientPage implements OnInit {
 
   goToHome(): void {
     this.router.navigate(['/client']);
+  }
+
+  goToRegister(): void {
+    this.router.navigate(['/client/register']);
   }
 }

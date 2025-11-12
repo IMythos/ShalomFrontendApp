@@ -44,18 +44,18 @@
           {{ userDisplayName() }}
         </span>
         <button (click)="onLogout()"
-          class="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg hover:bg-red-300 hover:text-white transition">
+          class="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg hover:bg-red-300 hover:text-white hover:cursor-pointer transition">
           <mat-icon fontIcon="logout"></mat-icon>
           <span>Cerrar Sesión</span>
         </button>
       </div>
       } @else {
-      <button (click)="onLogin()" class="flex items-center gap-2 text-white hover:text-gray-200 transition">
+      <button (click)="onLogin()" class="flex items-center gap-2 text-white hover:text-gray-200 hover:cursor-pointer transition">
         <mat-icon fontIcon="login"></mat-icon>
         <span>Iniciar Sesión</span>
       </button>
       <button (click)="onRegister()"
-        class="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg hover:bg-red-300 hover:text-white transition">
+        class="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg hover:bg-red-300 hover:text-white hover:cursor-pointer transition">
         <mat-icon fontIcon="add"></mat-icon>
         <span>Registrarse</span>
       </button>
